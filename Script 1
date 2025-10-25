@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import geopandas as gpd
+import osmnx as ox
+import pandas as pd
+
+OUT_DIR = Path("data/processed")
+OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+tracts = gpd.read_file("data/raw/tarrant_tracts_2023_48439.geojson")
+bbox = tracts.total_bounds
+north, south, east, west = bbox[3], bbox[1], bbox[2], bbox[0]
+G = ox.graph_from_bbox(north, south, east, west, network_type="drive")
+edges = ox.graph_to_gdfs(G, nodes=False, edges=True)
+edges["name_lower"] = edges["name"].astype(str).str.lower()
+
+targets = {"s cooper st": "S Cooper St", "matlock rd": "Matlock Rd", "park row": "Park Row Dr"}
+edges["corridor"] = edges["name_lower"].apply(lambda x: next((v for k, v in targets.items() if k in x), None))
+corridors = edges.dropna(subset=["corridor"]).dissolve(by="corridor")
+
+corridors = corridors.to_crs(epsg=3857)
+corridors["buffer"] = corridors.buffer(300)
+tracts = tracts.to_crs(epsg=3857)
+
+rows = []
+for _, c in corridors.iterrows():
+    buf = c["buffer"]
+    inter = tracts.geometry.intersection(buf)
+    overlap = inter.area / tracts.geometry.area
+    df = pd.DataFrame({
+        "GEOID": tracts["GEOID"],
+        "corridor": c.name,
+        "overlap_ratio": overlap
+    })
+    rows.append(df)
+out = pd.concat(rows)
+out.to_parquet(OUT_DIR / "tract_corridor_join.parquet", index=False)
+print("Saved:", OUT_DIR / "tract_corridor_join.parquet")
