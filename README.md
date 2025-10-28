@@ -1,17 +1,6 @@
 Arlington Socioeconomic Base Pack
 
-This repository contains a clean, reproducible data pipeline for building the Arlington Socioeconomic Base Pack at the Census Tract level.
-It uses Python, U.S. Census ACS 2023 5-Year Estimates, TIGER/Line shapefiles, and OpenStreetMap (OSM) data.
-The project is designed for clarity, reusability, and team collaboration.
+This project builds a reproducible socioeconomic base pack for Arlington, Texas at the Census Tract level using only Python and public data sources - no GIS software required.
+It combines data from the U.S. Census ACS 2023 5-Year Estimates, TIGER/Line tract geometries and OpenStreetMap (OSM) corridors. 
 
- Project Overview
-
-The pipeline automates:
-
-Pulling demographic and socioeconomic data from the U.S. Census Bureau API (ACS)
-
-Downloading and processing TIGER/Line shapefiles
-
-Cleaning, merging, and preparing datasets for analysis
-
-Exporting structured outputs ready for mapping and modeling
+ 
