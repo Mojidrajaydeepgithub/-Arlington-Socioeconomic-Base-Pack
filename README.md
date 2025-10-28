@@ -1,2 +1,17 @@
-# Arlington-Socioeconomic-Base-Pack
-Arlington Socioeconomic Base Pack A reproducible, open-data project that builds a clean, tract-level socioeconomic dataset for Arlington, Texas using public data sources U.S. Census ACS 2023 (5-year), TIGER/Line, and OpenStreetMap. Includes: Tract-level demographics, income, poverty, education and commute data.
+arlington_base_pack
+│
+├── data/
+│   ├── raw/                # Original downloaded data (ACS, TIGER, OSM)
+│   ├── processed/          # Cleaned and merged datasets
+│   └── outputs/            # Final exports (CSV, GeoJSON, etc.)
+│
+├── scripts/
+│   ├── 01_fetch_acs_data.py       # Pulls ACS demographic and economic data
+│   ├── 02_fetch_tiger_data.py     # Downloads TIGER/Line shapefiles
+│   ├── 03_clean_merge_data.py     # Cleans and merges datasets
+│   ├── 04_generate_outputs.py     # Produces final data outputs
+│
+├── .env.example           # Template for API key setup
+├── requirements.txt       # Required Python packages
+├── README.md              # Project documentation
+└── main.py                # Optional: runs all scripts in order
