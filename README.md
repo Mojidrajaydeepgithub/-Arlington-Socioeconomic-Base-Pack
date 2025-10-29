@@ -45,13 +45,13 @@ project_root/
 
 ---
 
-## 🔑 API Key Setup (Required)
+##  API Key Setup (Required)
 
 The U.S. Census Bureau requires an API key to access ACS data programmatically.
 
 ### **Step 1 – Obtain your key**
 Go to the official Census API signup page:  
-👉 [https://api.census.gov/data/key_signup.html](https://api.census.gov/data/key_signup.html)
+ [https://api.census.gov/data/key_signup.html](https://api.census.gov/data/key_signup.html)
 
 Fill out the form and you’ll receive your API key by email.
 
@@ -64,7 +64,7 @@ In your project’s root directory, create a file named `.env` containing your k
 CENSUS_API_KEY=your_api_key_here
 ```
 
-> ⚠️ **Important:** Never share or commit this `.env` file to GitHub.  
+>  **Important:** Never share or commit this `.env` file to GitHub.  
 > Each team member should create their own locally.
 
 ---
@@ -89,7 +89,7 @@ Below are detailed instructions for each script:
 
 ---
 
-### 🗺️ **1. fetch_tiger_tracts.py**
+###  **1. fetch_tiger_tracts.py**
 
 #### Purpose:
 Fetches TIGER tract shapefiles from the U.S. Census Bureau for Tarrant County, TX (FIPS 48439).
